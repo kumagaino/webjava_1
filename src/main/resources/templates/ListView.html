@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<style>
+	table {
+		border-collapse: collapse;
+	}
+	td {
+		border: solid 1px;
+		padding: 0.5em;
+	}
+	th {
+		border: solid 1px;
+		padding: 0.5em;
+	}
+	</style>
+</head>
+<body>
+    <form method="POST" action="/ResultView">
+        商品と個数を選択してください。<br>
+
+		<table>
+		<caption>ネット通販</caption>
+			<tr>
+				<th>商品番号</th>
+				<th>商品名</th>
+				<th>値段</th>
+				<th>購入個数</th>
+			</tr>
+			<tr th:each="itemlist : ${itemlist}">
+				<td th:text="${itemlist.itemId}"></td>
+				<td th:text="${itemlist.name}"></td>
+				<td th:text="${itemlist.price}"></td>
+				<td><input type="number" min="0" max="99" step="1" value="0"></td>
+			</tr>
+		</table>
+        <input type="submit" value="送信" />
+    </form>
+</body>
+</html>
