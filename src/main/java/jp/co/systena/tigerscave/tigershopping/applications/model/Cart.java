@@ -1,9 +1,9 @@
 package jp.co.systena.tigerscave.tigershopping.applications.model;
 
-public class Cart {
-  private String items = "リンゴ";
+import java.util.ArrayList;
+import java.util.List;
 
-  public String getName() {
-    return this.items;
-  }
+public class Cart {
+
+  private List<Order> orderList = new ArrayList<Order>();
 }

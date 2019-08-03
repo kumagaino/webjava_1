@@ -4,8 +4,8 @@ public class Item {
 
     public int itemId;
 
-    private String name;
+    public String name;
 
-    private int price;
+    public int price;
 
 }
