@@ -36,16 +36,31 @@ public class ListController {
      // 注文情報を格納するインスタンス生成
      // 毎回初期化する
      session.removeAttribute("listForm");
-     List<ListForm> listForm = (List<ListForm>) session.getAttribute("listForm");
-     listForm = new ArrayList<ListForm>();
+
+     // 商品数リストを作成する
+     // リンゴ用
+     ListForm ap = new ListForm();
+     ap.count = 0;
+
+     // オレンジ用
+     ListForm or = new ListForm();
+     or.count = 0;
+
+     // グレープ用
+     ListForm gr = new ListForm();
+     gr.count = 0;
+
+     // 注文用の配列
+     List<ListForm> listForm = new ArrayList<ListForm>();
      mav.addObject("listForm",listForm);
 
      // 画面表示用にリストを取得
+     // リスト用
      ListService listservice = new ListService();
      List<Item> itemlist = listservice.getItemList();
      mav.addObject("itemlist", itemlist);
 
-     // 理由はわからないが、セッションの見本にあったため配置。
+     // 理由はわからないが、セッションの見本にあったため記載。
      // メソッドの引数に設定がないため不必要では？
      BindingResult bindingResult = (BindingResult) session.getAttribute("result");
      if (bindingResult != null) {

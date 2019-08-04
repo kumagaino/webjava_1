@@ -18,7 +18,7 @@
 	</style>
 </head>
 <body>
-    <form action="#" method="POST" action="/ResultView" th:object="${listForm}">
+    <form method="POST" th:action="@{/ListView}" th:object="${listForm}">
         商品と個数を選択してください。<br>
 
 		<table>
@@ -31,11 +31,11 @@
 				<th>購入個数</th>
 			</tr>
 			<tr th:each="itemlist : ${itemlist}">
-				<td><input type="checkbox" th:field="*{selected}" class="form-control"></input></td>
+				<td><input type="checkbox" th:field="*{listForm.check}"></input></td>
 				<td th:text="${itemlist.itemId}"></td>
 				<td th:text="${itemlist.name}"></td>
 				<td th:text="${itemlist.price}"></td>
-				<td><input type="number" th:field="*{count}" class="form-control" min="0" max="99" step="1" value="0"></td>
+				<!--  <td><input type="number" th:field="*{count}" class="form-control" min="0" max="99" step="1" value="0" aria-describedby="basic-addon2"></td>  -->
 			</tr>
 		</table>
         <input type="submit" value="送信" />
