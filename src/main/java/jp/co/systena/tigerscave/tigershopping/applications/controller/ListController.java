@@ -1,14 +1,14 @@
 package jp.co.systena.tigerscave.tigershopping.applications.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import jp.co.systena.tigerscave.tigershopping.applications.model.Cart;
 import jp.co.systena.tigerscave.tigershopping.applications.model.Item;
@@ -24,34 +24,12 @@ public class ListController {
    @RequestMapping(value="/ListView", method=RequestMethod.GET)
    public ModelAndView show(ModelAndView mav) {
 
-     // セッション情報から保存したデータを取得する。
-     List<Cart> cart = (List<Cart>) session.getAttribute("cart");
-     if (cart == null) {
-       // 初期だった場合作成
-       cart = new ArrayList<Cart>();
-       session.setAttribute("cart", cart);
-     }
-     mav.addObject("cart",cart);
-
      // 注文情報を格納するインスタンス生成
      // 毎回初期化する
      session.removeAttribute("listForm");
 
-     // 商品数リストを作成する
-     // リンゴ用
-     ListForm ap = new ListForm();
-     ap.count = 0;
-
-     // オレンジ用
-     ListForm or = new ListForm();
-     or.count = 0;
-
-     // グレープ用
-     ListForm gr = new ListForm();
-     gr.count = 0;
-
      // 注文用の配列
-     List<ListForm> listForm = new ArrayList<ListForm>();
+     ListForm listForm = new ListForm();
      mav.addObject("listForm",listForm);
 
      // 画面表示用にリストを取得
@@ -72,9 +50,30 @@ public class ListController {
    }
 
    @RequestMapping(value="/ResultView", method=RequestMethod.POST)
-   public ModelAndView order(@RequestParam("listForm")String listForm,ModelAndView mav) {
+   public ModelAndView order(ModelAndView mav, @Valid ListForm listForm, BindingResult bindingResult, HttpServletRequest request) {
+
+     // セッション情報から保存したデータを取得する。
+     Cart cart = (Cart) session.getAttribute("cart");
+     if (cart == null) {
+       // 初期だった場合作成
+       cart = new Cart();
+       session.setAttribute("cart", cart);
+     }
+
+     if (bindingResult.getAllErrors().size() > 0) {
+       // エラーがある場合はそのまま戻す
+       mav.addObject("listForm",listForm);  // 新規クラスを設定
+
+       mav.addObject("cart", cart);
+
+       // Viewのテンプレート名を設定
+       mav.setViewName("ListView");
+       return mav;
+
+     }
+
+     mav.addObject("cart",cart);
      mav.setViewName("ResultView");
-     mav.addObject("listForm",listForm);
      return mav;
    }
 }
