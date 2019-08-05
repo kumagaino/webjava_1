@@ -27,7 +27,6 @@
 				<th>商品番号</th>
 				<th>商品名</th>
 				<th>値段</th>
-				<th>購入個数</th>
 			</tr>
 			<tr th:each="itemlist : ${itemlist}">
 				<td th:text="${itemlist.itemId}" th:field="*{itemId}"></td>
@@ -35,6 +34,9 @@
 				<td th:text="${itemlist.price}"></td>
 			</tr>
 			<tr>
+				<th>商品番号</th>
+				<th>個数</th>
+			    <td><input type="text" th:field="*{itemId}"></input></td>
 				<td><input type="number" th:field="*{count}" min="0" max="99" step="1" value="0"></input></td>
 				<td><input type="submit" value="送信"></input></td>
 			</tr>
