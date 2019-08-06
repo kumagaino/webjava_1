@@ -29,8 +29,7 @@ public class ListController {
      session.removeAttribute("listForm");
 
      // 注文用の配列
-     ListForm listForm = new ListForm();
-     mav.addObject("listForm",listForm);
+     mav.addObject("listForm", new ListForm());
 
      // 画面表示用にリストを取得
      // リスト用
@@ -69,10 +68,10 @@ public class ListController {
        // Viewのテンプレート名を設定
        mav.setViewName("ListView");
        return mav;
-
      }
 
-     mav.addObject("cart",cart);
+     mav.addObject("itemId",listForm.itemId);
+     mav.addObject("count",listForm.count);
      mav.setViewName("ResultView");
      return mav;
    }

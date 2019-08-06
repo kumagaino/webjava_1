@@ -33,12 +33,16 @@
 				<td th:text="${itemlist.name}"></td>
 				<td th:text="${itemlist.price}"></td>
 			</tr>
+		</table>
+		<table>
+			<tr>
 			<tr>
 				<th>商品番号</th>
 				<th>個数</th>
-			    <td><input type="text" th:field="*{itemId}"></input></td>
-				<td><input type="number" th:field="*{count}" min="0" max="99" step="1" value="0"></input></td>
-				<td><input type="submit" value="送信"></input></td>
+			</tr>
+			    <td><input type="text" th:field="*{itemId}"/></td>
+				<td><input type="number" th:field="*{count}" min="0" max="99" step="1" value="0"/></td>
+				<td><input type="submit" value="送信"/></td>
 			</tr>
 		</table>
     </form>

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>購入結果</title>
 </head>
 <body>
-<p th:text="${cart}"></p>
+    <form action="#" th:action="@{/ResultView}" method="POST">
+	<p th:text="${itemId}"></p>
+	</form>
 </body>
 </html>
