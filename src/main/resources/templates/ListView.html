@@ -18,11 +18,11 @@
 	</style>
 </head>
 <body>
-    <form action="#" method="POST" th:action="@{/ListView}" th:object="${listForm}">
+    <form action="#" method="POST" th:action="@{/ResultView}" th:object="${listForm}">
         商品と個数を選択してください。<br>
 
 		<table>
-		<caption>ネット通販</caption>
+		<caption>商品一覧</caption>
 			<tr>
 				<th>商品番号</th>
 				<th>商品名</th>
@@ -32,30 +32,23 @@
 				<td th:text="${itemlist.itemId}" th:field="*{itemId}"></td>
 				<td th:text="${itemlist.name}"></td>
 				<td th:text="${itemlist.price}"></td>
-<<<<<<< HEAD
-=======
-			</tr>
-			<tr>
-				<td><input type="number" th:field="*{count}" min="0" max="99" step="1" value="0"></input></td>
-				<td><input type="submit" value="送信"></input></td>
->>>>>>> refs/remotes/origin/master
 			</tr>
 		</table>
-<<<<<<< HEAD
+
+
 		<table>
-			<tr>
+		<caption>注文票</caption>
 			<tr>
 				<th>商品番号</th>
 				<th>個数</th>
 			</tr>
 			<tr>
-			    <td><input type="text" th:field="*{itemId}"/></td>
-				<td><input type="number" th:field="*{count}" min="0" max="99" step="1" value="0"/></td>
-				<td><input type="submit" value="送信"/></td>
+				<td><input type="text" th:field="*{itemId}" value="送信"></input></td>
+				<td><input type="number" th:field="*{count}" min="0" max="99" step="1" value="0"></input></td>
+				<td><input type="submit" value="送信"></input></td>
 			</tr>
 		</table>
-=======
->>>>>>> refs/remotes/origin/master
+
     </form>
 </body>
 </html>

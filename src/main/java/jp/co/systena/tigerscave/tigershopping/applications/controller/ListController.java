@@ -37,12 +37,7 @@ public class ListController {
      List<Item> itemlist = listservice.getItemList();
      mav.addObject("itemlist", itemlist);
 
-     // 理由はわからないが、セッションの見本にあったため記載。
-     // メソッドの引数に設定がないため不必要では？
-     BindingResult bindingResult = (BindingResult) session.getAttribute("result");
-     if (bindingResult != null) {
-       mav.addObject("bindingResult", bindingResult);
-     }
+     
      // Viewのテンプレート名を設定
      mav.setViewName("ListView");
      return mav;
