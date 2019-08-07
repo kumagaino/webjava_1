@@ -62,7 +62,6 @@ public class ListController {
      if (bindingResult.getAllErrors().size() > 0) {
        // エラーがある場合はそのまま戻す
        mav.addObject("listForm",listForm);  // 新規クラスを設定
-       
        mav.addObject("cart", cart);
 
        // Viewのテンプレート名を設定
@@ -72,6 +71,7 @@ public class ListController {
 
      mav.addObject("itemId",listForm.itemId);
      mav.addObject("count",listForm.count);
+
      mav.setViewName("ResultView");
      return mav;
    }
