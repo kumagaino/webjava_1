@@ -1,5 +1,6 @@
 package jp.co.systena.tigerscave.tigershopping.applications.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import jp.co.systena.tigerscave.tigershopping.applications.model.Cart;
 import jp.co.systena.tigerscave.tigershopping.applications.model.Item;
 import jp.co.systena.tigerscave.tigershopping.applications.model.ListForm;
 import jp.co.systena.tigerscave.tigershopping.applications.model.ListService;
+import jp.co.systena.tigerscave.tigershopping.applications.model.Order;
 
 @Controller
 public class ListController {
@@ -37,7 +39,7 @@ public class ListController {
      List<Item> itemlist = listservice.getItemList();
      mav.addObject("itemlist", itemlist);
 
-     
+
      // Viewのテンプレート名を設定
      mav.setViewName("ListView");
      return mav;
@@ -64,8 +66,23 @@ public class ListController {
        return mav;
      }
 
-     mav.addObject("itemId",listForm.itemId);
-     mav.addObject("count",listForm.count);
+     // itemIdから商品名と価格を取得(Mapを使用)
+     HashMap<Integer, Item> ItemList = new HashMap<Integer, Item>();
+     ListService service = new ListService();
+     List<Item> itemList = service.getItemList();
+     for (Item item : itemList) {
+       ItemList.put(item.getItemid(), item);
+     }
+     mav.addObject("itemList", ItemList);
+
+     // セッションに保存する
+     Order order = new Order();
+     order.setItemid(listForm.itemId);
+     order.setNum(listForm.count);
+     cart.add(order);
+     session.setAttribute("cart", cart);
+
+     mav.addObject("orderList", cart.getOrderList());
 
      mav.setViewName("ResultView");
      return mav;

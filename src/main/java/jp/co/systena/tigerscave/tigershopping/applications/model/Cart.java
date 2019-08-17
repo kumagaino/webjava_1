@@ -7,10 +7,6 @@ public class Cart {
 
   public List<Order> orderList = new ArrayList<Order>();
 
-  public Cart() {
-
-  }
-
   public void add(Order order) {
     orderList.add(order);
   }
